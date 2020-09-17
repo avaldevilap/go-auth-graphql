@@ -1,40 +1,32 @@
-type Link {
-  id: ID!
-  title: String!
-  address: String!
-  user: User!
-}
+scalar Time
 
 type User {
   id: ID!
-  name: String!
+  created_at: Time
+  updated_at: Time
+  email: String!
+  password: String!
 }
 
-type Query {
-  links: [Link!]!
-}
-
-input NewLink {
-  title: String!
-  address: String!
-}
-
-input RefreshTokenInput{
+input RefreshTokenInput {
   token: String!
 }
 
 input NewUser {
-  username: String!
+  email: String!
   password: String!
 }
 
 input Login {
-  username: String!
+  email: String!
   password: String!
 }
 
+type Query {
+  users: [User!]!
+}
+
 type Mutation {
-  createLink(input: NewLink!): Link!
   createUser(input: NewUser!): String!
   login(input: Login!): String!
   refreshToken(input: RefreshTokenInput!): String!
